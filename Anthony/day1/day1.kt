@@ -1,9 +1,10 @@
-
+package day1
 import java.io.File
 
 
 fun part1() {
-    val text = File("day1input.txt").readText()
+    val path = System.getProperty("user.dir")
+    val text = File("$path/day1/day1input.txt").readText()
     val textArray = text.split("\n").map {it.trim() }
     val calorieList = mutableListOf<Int>()
 
@@ -23,7 +24,8 @@ fun part1() {
 }
 
 fun part2() {
-    val text = File("day1input.txt").readText()
+    val path = System.getProperty("user.dir")
+    val text = File("$path/day1/day1input.txt").readText()
     val textArray = text.split("\n").map {it.trim() }
     val calorieList = mutableListOf<Int>()
 
