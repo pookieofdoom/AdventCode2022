@@ -2,17 +2,17 @@ package day3
 
 import java.io.File
 
-fun day1(){
+fun day1() {
     val path = System.getProperty("user.dir")
     var total = 0
-    val text = File("$path/day3/day3input.txt").readLines().forEach{
+    val text = File("$path/day3/day3input.txt").readLines().forEach {
         total += convertToPriority(duplicateCharacters(it))
     }
     println(total)
 }
 
 
-fun duplicateCharacters(text: String) : Char {
+fun duplicateCharacters(text: String): Char {
 
     val item1List = mutableListOf<Char>()
     for (i in 0 until text.length / 2) {
@@ -28,7 +28,7 @@ fun duplicateCharacters(text: String) : Char {
 
 }
 
-fun convertToPriority(ch : Char) : Int {
+fun convertToPriority(ch: Char): Int {
     val MAGIC_ASCII_UPPERCASE = 38
     val MAGIC_ASCII_LOWERCASE = 96
     var value = 0
@@ -41,7 +41,31 @@ fun convertToPriority(ch : Char) : Int {
     return value
 }
 
+fun day2() {
+    val path = System.getProperty("user.dir")
+    var total = 0
+    val elfGroup = mutableListOf<String>()
+    val text = File("$path/day3/day3input.txt").readLines().forEach {
+        elfGroup.add(it)
+        if (elfGroup.size == 3) {
+            total += convertToPriority(duplicateCharactersWithinGroup(elfGroup))
+            elfGroup.clear()
+        }
+
+    }
+    println(total)
+}
+
+fun duplicateCharactersWithinGroup(elfGroupText: MutableList<String>): Char {
+    var duplicateList = elfGroupText[0].toMutableList()
+    for (i in 1 until elfGroupText.size) {
+        duplicateList.retainAll(elfGroupText[i].toMutableList())
+    }
+
+    return duplicateList[0]
+}
+
 fun main() {
     day1()
-    // day2()
+    day2()
 }
