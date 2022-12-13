@@ -9,15 +9,12 @@ foreach (var rucksack in inputs)
     // Part 1
     int lineLen = rucksack.Length;
     HashSet<char> rucksackItems = new HashSet<char>();
-    badgeGroup.Add(new HashSet<char>());
     for (int i = 0; i < lineLen / 2; i++)
     {
         rucksackItems.Add(rucksack[i]);
-        badgeGroup[(badgeGroup.Count-1) % 3].Add(rucksack[i]);
     }
     for (int i = lineLen / 2; i < lineLen; i++)
     {
-        badgeGroup[(badgeGroup.Count-1) % 3].Add(rucksack[i]);
         if(rucksackItems.Contains(rucksack[i]))
         {
             // Could initialize all possible values to 0 to skip this check
@@ -26,10 +23,12 @@ foreach (var rucksack in inputs)
                 itemsToPrioritize[rucksack[i]]++;
             else
                 itemsToPrioritize[rucksack[i]] = 1;
+            break;
         }
     }
 
-
+    // Part 2
+    badgeGroup.Add(new HashSet<char>(rucksack));
     if (badgeGroup.Count == 3)
     {
         badgeGroup[0].IntersectWith(badgeGroup[1]);
